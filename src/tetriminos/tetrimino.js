@@ -5,8 +5,8 @@ export default class Tetrimino {
     this.shape = [];
     this.color = '';
     this.board = board;
-    this.x = 0;
-    this.y = 0;
+    this.x = 3;
+    this.y = 18;
     this.softDrop();
   }
 

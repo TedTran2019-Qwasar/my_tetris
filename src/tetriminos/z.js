@@ -9,7 +9,5 @@ export default class Z extends Tetrimino {
       [0, 0, 0],
     ];
     this.color = 'red';
-    this.x = 3;
-    this.y = 17;
   }
 }

@@ -1,3 +1,7 @@
+// Board holds all 40 rows
+// The game only renders from 20 and beyond
+// Draw from 20 to 40, x - 20 * blocksize
+// Let rest be abstracted away
 export default class Board {
   constructor(cols, rows, blockSize) {
     this.rows = rows;
@@ -10,6 +14,7 @@ export default class Board {
     return Array.from(Array(this.rows), () => Array(this.cols).fill(null));
   }
 
+  // 40 rows, but only render 20-40 in the spots of 0-20
   draw(ctx) {
     this.grid.forEach((row, y) => {
       row.forEach((ele, x) => {

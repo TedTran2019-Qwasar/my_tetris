@@ -9,7 +9,5 @@ export default class J extends Tetrimino {
       [0, 0, 0],
     ];
     this.color = 'blue';
-    this.x = 3;
-    this.y = 17; // 21/22 from bottom
   }
 }
