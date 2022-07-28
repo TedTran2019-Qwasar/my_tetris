@@ -1,8 +1,11 @@
 export default class GameView {
-  constructor(game, ctx) {
+  constructor(game, ctx, holdCtx, nextCtx) {
     this.game = game;
     this.ctx = ctx;
+    this.holdCtx = holdCtx;
+    this.nextCtx = nextCtx;
     this.paused = false;
+    this.isGameOver = false;
     this.modal = document.querySelector('.modal');
     this.pause = document.querySelector('.pause');
     this.gameOver = document.querySelector('.game-over');
@@ -15,9 +18,9 @@ export default class GameView {
 
   animate() {
     requestAnimationFrame(() => {
+      if (this.isGameOver) { return };
       if (!this.paused) {
-        let isGameOver = this.game.step();
-        if (isGameOver) {
+        if (this.game.step()) { // Returns true if game over
           this.gameOverFunc();
           return;
         }
@@ -49,10 +52,12 @@ export default class GameView {
         case 'KeyZ':
           this.game.pieceManager.rotateLeft();
           break;
-        case 'Escape':
         case 'F1':
         case 'KeyP':
           this.togglePause();
+          break;
+        case 'Escape':
+          this.setGameOver();
           break;
         case 'ArrowLeft':
         case 'KeyA':
@@ -87,5 +92,10 @@ export default class GameView {
     } else {
       this.gameOver.style.setProperty('display', 'none');
     }
+  }
+
+  setGameOver() {
+    this.isGameOver = true;
+    this.gameOverFunc();
   }
 }

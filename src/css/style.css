@@ -1,10 +1,31 @@
-body {
-  display: flex;
-  justify-content: center; 
-}
-
 #game-canvas {
   background-color: black;
+  width: 100%;
+  height: 100%;
+}
+
+.game-canvas-container {
+  width: 600px;
+}
+
+.hold-canvas-container, .next-canvas-container {
+  width: 300px;
+  height: 300px;
+}
+
+#hold-canvas {
+  background-color: green;
+}
+
+#next-canvas {
+  background-color: red;
+}
+
+.canvases {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .modal {

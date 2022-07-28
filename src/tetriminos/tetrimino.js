@@ -72,7 +72,10 @@ export default class Tetrimino {
     const oldShape = this.shape;
     this.shape = newShape.map(row => row.reverse());
     if (!this.isValidPositions()) {
-      this.shape = oldShape;
+      let wallKickFailed = this.wallKick();
+      if (wallKickFailed) {
+        this.shape = oldShape;
+      }
     }
   }
 
@@ -81,8 +84,11 @@ export default class Tetrimino {
     const oldShape = this.shape;
     this.shape = this.transpose(this.shape);
     if (!this.isValidPositions()) {
-      this.shape = oldShape;
-      this.shape.map(row => row.reverse());
+      let wallKickFailed = this.wallKick();
+      if (wallKickFailed) {
+        this.shape = oldShape;
+        this.shape.map(row => row.reverse());
+      }
     }
   }
 
@@ -96,5 +102,19 @@ export default class Tetrimino {
       newShape.push(row);
     }
     return newShape;
+  }
+
+  // Simple wall kick algorithm. Try to check right/left are valid. 
+  wallKick() {
+    this.x += 1;
+    if (this.isValidPositions()) {
+      return false;
+    } else {
+      this.x -= 2;
+    }
+    if (this.isValidPositions()) {
+      return false;
+    }
+    return true;
   }
 }
