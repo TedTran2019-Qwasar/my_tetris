@@ -40,7 +40,7 @@ export default class GameView {
           this.game.pieceManager.rotateRight();
           break;
         case 'Space':
-          this.game.pieceManager.hardDrop();
+          this.game.pieceManager.hardDropIt();
           break;
         case 'ShiftLeft':
         case 'ShiftRight':

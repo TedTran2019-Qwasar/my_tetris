@@ -15,6 +15,7 @@ export default class PieceManager {
     this.holdCount = 0;
     this.next = [this.randomPiece(), this.randomPiece(), this.randomPiece()];
     this.lookAhead = this.calculateLookAhead();
+    this.hardDrop = false;
   }
 
   static pieces = [Straight, Square, T, J, L, S, Z];
@@ -58,7 +59,11 @@ export default class PieceManager {
   }
 
   move() {
-    if (this.dropCount === 60) {
+    if (this.dropCount === 60 || this.hardDrop) {
+      if (this.hardDrop) {
+        this.current.y = this.lookAhead;
+        this.hardDrop = false;
+      }
       let tetriminoPlaced = this.current.drop();
       if (tetriminoPlaced) {
         this.createPiece();
@@ -170,7 +175,8 @@ export default class PieceManager {
     this.current.rotateLeft();
   }
 
-  hardDrop() {
-    this.current.y = this.lookAhead;
+  // This locks!
+  hardDropIt() {
+    this.hardDrop = true;
   }
 }
