@@ -10,4 +10,9 @@ export default class Square extends Tetrimino {
     this.color = 'yellow';
     this.x = 4;
   }
+
+  resetCoordinates() {
+    this.x = 4;
+    this.y = 20;
+  }
 }

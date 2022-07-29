@@ -23,13 +23,36 @@ export default class PieceManager {
     return new PieceManager.pieces[rand](this.board);
   }
 
+  // createPiece() {
+  //   this.current = this.next.shift();
+  //   this.next.push(this.randomPiece());
+  //   if (!this.current.isValidPositions()) {
+  //     this.current.y -= 1;
+  //   }
+  //   if (!this.current.isValidPositions()) {
+  //     this.current = null;
+  //   }
+  // }
+
   createPiece() {
-    this.current = this.randomPiece();
-    if (!this.current.isValidPositions()) {
-      this.current.y -= 1;
+    this.current = this.isValidPiece(this.next[0]);
+    if (this.current) {
+      this.next.shift();
+      this.next.push(this.randomPiece());
     }
-    if (!this.current.isValidPositions()) {
-      this.current = null;
+  }
+
+  isValidPiece(piece) {
+    if (!piece.isValidPositions()) {
+      piece.y -= 1;
+    } else {
+      return piece;
+    }
+    if (!piece.isValidPositions()) {
+      piece.y += 1;
+      return null;
+    } else {
+      return piece;
     }
   }
 
@@ -53,29 +76,63 @@ export default class PieceManager {
     if (this.current) {
       this.current.draw(ctx);
     }
-    this.drawHoldContainer(holdCtx, sideBlockSize);
+    this.drawHoldContainer(holdCtx);
     if (this.hold) {
       this.hold.drawBlock(holdCtx, 0, sideBlockSize);
+    }
+    this.drawNextContainer(nextCtx);
+    this.next.forEach((nextPiece, index) => {
+      nextPiece.drawBlock(nextCtx, index, sideBlockSize);
+    })
+  }
+
+  // Fix magic numbers later
+  drawNextContainer(ctx) {
+    ctx.clearRect(0, 0, 180, 675);
+    for (let y = 0; y < 15; y++) {
+      for (let x = 0; x < 4; x++) {
+        ctx.strokeStyle = 'green';
+        ctx.strokeRect(x * 45, y * 45, 45, 45);
+      }
     }
   }
 
   drawHoldContainer(ctx) {
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0, 0, 150, 150);
+    ctx.clearRect(0, 0, 180, 180);
+    for (let y = 0; y < 4; y++) {
+      for (let x = 0; x < 4; x++) {
+        ctx.strokeStyle = 'green';
+        ctx.strokeRect(x * 45, y * 45, 45, 45);
+      }
+    }
   }
+
+  // drawHoldContainer(ctx) {
+  //   ctx.fillStyle = 'black';
+  //   ctx.fillRect(0, 0, 150, 150);
+  // }
 
   holdTetrimino() {
     if (this.holdCount === 0) {
       if (this.hold === null) {
-        this.hold = this.current;
+        this.enterHold(this.current);
         this.createPiece();
       } else {
-        const temp = this.current;
-        this.current = this.hold;
-        this.hold = temp;
+        if (this.isValidPiece(this.hold)) {
+          const temp = this.current;
+          this.current = this.hold;
+          this.enterHold(temp);
+        } else {
+          return;
+        }
       }
       this.holdCount += 1;
     }
+  }
+
+  enterHold(piece) {
+    piece.resetCoordinates();
+    this.hold = piece;
   }
 
   moveLeft() {

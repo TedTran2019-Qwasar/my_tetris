@@ -12,4 +12,9 @@ export default class Straight extends Tetrimino {
     this.color = '#3399ff';
     this.y = 19;
   }
+
+  resetCoordinates() {
+    this.x = 3;
+    this.y = 19;
+  }
 }

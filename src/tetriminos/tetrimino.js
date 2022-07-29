@@ -19,6 +19,11 @@ export default class Tetrimino {
     return false;
   }
 
+  resetCoordinates() {
+    this.x = 3;
+    this.y = 20;
+  }
+
   // Minus 20 here to render within 0-20
   draw(ctx) {
     this.shape.forEach((row, y) => {
@@ -37,7 +42,8 @@ export default class Tetrimino {
       row.forEach((block, x) => {
         if (block) {
           ctx.fillStyle = this.color;
-          ctx.fillRect(x * sideSize,  y * sideSize, sideSize, sideSize);
+          let multiplier = pos * 5
+          ctx.fillRect(x * sideSize,  (y + multiplier) * sideSize, sideSize, sideSize);
         }
       });
     });
@@ -127,6 +133,7 @@ export default class Tetrimino {
     if (this.isValidPositions()) {
       return false;
     }
+    this.x += 1;
     return true;
   }
 }
