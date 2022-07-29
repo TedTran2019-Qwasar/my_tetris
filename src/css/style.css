@@ -1,31 +1,35 @@
 #game-canvas {
   background-color: black;
-  width: 100%;
-  height: 100%;
 }
 
 .game-canvas-container {
-  width: 600px;
+  height: 900px;
+  width: 450px;
 }
 
 .hold-canvas-container, .next-canvas-container {
-  width: 300px;
-  height: 300px;
+  width: 150px;
+}
+
+.hold-canvas-container {
+  height: 150px;
+}
+
+.next-canvas-container {
+  height: 450px;
 }
 
 #hold-canvas {
-  background-color: green;
+  background-color: black;
 }
 
 #next-canvas {
-  background-color: red;
+  background-color: black;
 }
 
 .canvases {
-  width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .modal {

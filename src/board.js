@@ -16,16 +16,29 @@ export default class Board {
 
   // 40 rows, but only render 20-40 in the spots of 0-20
   draw(ctx) {
-    this.grid.forEach((row, y) => {
-      row.forEach((ele, x) => {
-        if (ele === null) {
-          this.drawEmpty(ctx, x * this.blockSize, y * this.blockSize);
+    for (let y = 20; y < this.rows; y++) {
+      for (let x = 0; x < this.cols; x++) {
+        let tile = this.grid[y][x];
+        if (tile === null) {
+          this.drawEmpty(ctx, x * this.blockSize, (y - 20) * this.blockSize);
         } else {
-          this.drawTile(ctx, x * this.blockSize, y * this.blockSize, ele);
+          this.drawTile(ctx, x * this.blockSize, (y - 20) * this.blockSize, tile);
         }
-      })
-    })
+      }
+    }
   }
+
+  // draw(ctx) {
+  //   this.grid.forEach((row, y) => {
+  //     row.forEach((ele, x) => {
+  //       if (ele === null) {
+  //         this.drawEmpty(ctx, x * this.blockSize, y * this.blockSize);
+  //       } else {
+  //         this.drawTile(ctx, x * this.blockSize, y * this.blockSize, ele);
+  //       }
+  //     })
+  //   })
+  // }
 
   drawTile(ctx, x, y, tile) {
     // tile.draw(ctx);

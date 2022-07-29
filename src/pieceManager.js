@@ -11,6 +11,9 @@ export default class PieceManager {
     this.board = board;
     this.current = this.randomPiece();
     this.dropCount = 0;
+    this.hold = null;
+    this.holdCount = 0;
+    this.next = [this.randomPiece(), this.randomPiece(), this.randomPiece()];
   }
 
   static pieces = [Straight, Square, T, J, L, S, Z];
@@ -32,9 +35,10 @@ export default class PieceManager {
 
   move() {
     if (this.dropCount === 60) {
-      let result = this.current.drop();
-      if (result) {
+      let tetriminoPlaced = this.current.drop();
+      if (tetriminoPlaced) {
         this.createPiece();
+        this.holdCount = 0;
         if (this.current === null) {
           return true;
         }
@@ -45,9 +49,32 @@ export default class PieceManager {
     return false;
   }
 
-  draw(ctx) {
+  draw(ctx, holdCtx, nextCtx, sideBlockSize) {
     if (this.current) {
       this.current.draw(ctx);
+    }
+    this.drawHoldContainer(holdCtx, sideBlockSize);
+    if (this.hold) {
+      this.hold.drawBlock(holdCtx, 0, sideBlockSize);
+    }
+  }
+
+  drawHoldContainer(ctx) {
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, 150, 150);
+  }
+
+  holdTetrimino() {
+    if (this.holdCount === 0) {
+      if (this.hold === null) {
+        this.hold = this.current;
+        this.createPiece();
+      } else {
+        const temp = this.current;
+        this.current = this.hold;
+        this.hold = temp;
+      }
+      this.holdCount += 1;
     }
   }
 

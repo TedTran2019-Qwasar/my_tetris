@@ -18,13 +18,13 @@ export default class GameView {
 
   animate() {
     requestAnimationFrame(() => {
-      if (this.isGameOver) { return };
+      if (this.isGameOver) { 
+        this.gameOverFunc();
+        return 
+      };
       if (!this.paused) {
-        if (this.game.step()) { // Returns true if game over
-          this.gameOverFunc();
-          return;
-        }
-        this.game.draw(this.ctx);
+        this.isGameOver = this.game.step();
+        this.game.draw(this.ctx, this.holdCtx, this.nextCtx);
       }
       this.animate();
     })
@@ -45,7 +45,7 @@ export default class GameView {
         case 'ShiftLeft':
         case 'ShiftRight':
         case 'KeyC':
-          // Hold
+          this.game.pieceManager.holdTetrimino();
           break;
         case 'ControlLeft':
         case 'ControlRight':
@@ -96,6 +96,5 @@ export default class GameView {
 
   setGameOver() {
     this.isGameOver = true;
-    this.gameOverFunc();
   }
 }

@@ -19,16 +19,16 @@ export default class Game {
     return false;
   }
 
-  draw(ctx) {
+  draw(ctx, holdCtx, nextCtx) {
     ctx.clearRect(0, 0, this.dimX, this.dimY);
     this.board.draw(ctx);
-    this.pieceManager.draw(ctx);
+    this.pieceManager.draw(ctx, holdCtx, nextCtx, Game.BLOCK_SIZE);
   }
 }
 
-Game.DIM_X = 600;
-Game.DIM_Y = 2400;
+Game.DIM_X = 450;
+Game.DIM_Y = 900;
 Game.ROWS = 40;
 Game.COLS = 10;
-Game.BLOCK_SIZE = 60;
+Game.BLOCK_SIZE = 45;
 Game.MOVE_SPEED = 1;

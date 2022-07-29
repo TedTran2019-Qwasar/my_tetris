@@ -6,8 +6,7 @@ export default class Tetrimino {
     this.color = '';
     this.board = board;
     this.x = 3;
-    this.y = 18;
-    this.softDrop();
+    this.y = 20;
   }
 
   drop() {
@@ -20,12 +19,25 @@ export default class Tetrimino {
     return false;
   }
 
+  // Minus 20 here to render within 0-20
   draw(ctx) {
     this.shape.forEach((row, y) => {
       row.forEach((block, x) => {
         if (block) {
           ctx.fillStyle = this.color;
-          ctx.fillRect((this.x + x) * Game.BLOCK_SIZE, (this.y + y) * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+          ctx.fillRect((this.x + x) * Game.BLOCK_SIZE, (this.y + y - 20) * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+        }
+      });
+    });
+  }
+
+  // 0 - 2. 
+  drawBlock(ctx, pos, sideSize) {
+    this.shape.forEach((row, y) => {
+      row.forEach((block, x) => {
+        if (block) {
+          ctx.fillStyle = this.color;
+          ctx.fillRect(x * sideSize,  y * sideSize, sideSize, sideSize);
         }
       });
     });
