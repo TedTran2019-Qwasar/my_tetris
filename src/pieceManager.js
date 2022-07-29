@@ -169,4 +169,8 @@ export default class PieceManager {
   rotateLeft() {
     this.current.rotateLeft();
   }
+
+  hardDrop() {
+    this.current.y = this.lookAhead;
+  }
 }
