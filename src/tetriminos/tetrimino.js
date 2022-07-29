@@ -49,6 +49,20 @@ export default class Tetrimino {
     });
   }
 
+  drawLookAhead(ctx, aheadY) {
+    const prevY = this.y;
+    this.y = aheadY;
+    this.shape.forEach((row, y) => {
+      row.forEach((block, x) => {
+        if (block) {
+          ctx.fillStyle = 'grey';
+          ctx.fillRect((this.x + x) * Game.BLOCK_SIZE, (this.y + y - 20) * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+        }
+      });
+    });
+    this.y = prevY;
+  }
+
   moveLeft() {
     this.x -= Game.MOVE_SPEED;
     if (!this.isValidPositions()) {

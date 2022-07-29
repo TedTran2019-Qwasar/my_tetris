@@ -14,6 +14,7 @@ export default class PieceManager {
     this.hold = null;
     this.holdCount = 0;
     this.next = [this.randomPiece(), this.randomPiece(), this.randomPiece()];
+    this.lookAhead = this.calculateLookAhead();
   }
 
   static pieces = [Straight, Square, T, J, L, S, Z];
@@ -68,12 +69,26 @@ export default class PieceManager {
       }
       this.dropCount = 0;
     }
+    this.lookAhead = this.calculateLookAhead();
     this.dropCount += 1;
     return false;
   }
 
+  // The current with the final possible y value
+  calculateLookAhead() {
+    let preyY = this.current.y;
+    while (this.current.isValidPositions()) {
+      this.current.y += 1
+    }
+    this.current.y -= 1;
+    let tmp = this.current.y;
+    this.current.y = preyY;
+    return tmp;
+  }
+
   draw(ctx, holdCtx, nextCtx, sideBlockSize) {
     if (this.current) {
+      this.current.drawLookAhead(ctx, this.lookAhead);
       this.current.draw(ctx);
     }
     this.drawHoldContainer(holdCtx);
