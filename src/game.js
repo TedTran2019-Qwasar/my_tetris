@@ -16,6 +16,7 @@ export default class Game {
   this.scoreHolders = document.getElementsByClassName('score-number');
   this.levelHolder = document.querySelector('.level-number');
   this.linesHolder = document.querySelector('.lines-number');
+  this.showScore();
   }
 
   step() {
@@ -38,6 +39,10 @@ export default class Game {
     this.score += Game.LINE_SCORE[lines - 1] * (this.level + 1);
     this.lines += lines;
     this.level = Math.floor(this.lines / 10);
+    this.showScore();
+  }
+
+  showScore() {
     this.scoreHolders[0].textContent = this.score;
     this.scoreHolders[1].textContent = this.score;
     this.levelHolder.textContent = this.level;

@@ -1,3 +1,5 @@
+import Game from './game.js';
+
 export default class GameView {
   constructor(game, ctx, holdCtx, nextCtx) {
     this.game = game;
@@ -9,8 +11,18 @@ export default class GameView {
     this.modal = document.querySelector('.modal');
     this.pause = document.querySelector('.pause');
     this.gameOver = document.querySelector('.game-over');
+    document.querySelector('#restart').addEventListener('click', () => {
+      this.restart();
+    })
   }
   
+  restart() {
+    this.game = new Game();
+    this.isGameOver = false;
+    this.gameOverFunc();
+    this.animate();
+  }
+
   start() {
     this.bindKeyHandlers();
     this.animate();
