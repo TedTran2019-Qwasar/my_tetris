@@ -74,11 +74,14 @@ export default class Board {
   }
 
   clearRows() {
+    let linesCleared = 0;
     this.grid.forEach((row, y) => {
       if (row.every(block => block !== null)) {
+        linesCleared += 1;
         this.grid.splice(y, 1);
         this.grid.unshift(Array(this.cols).fill(null));
       }
     })
+    return linesCleared;
   }
 }

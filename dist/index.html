@@ -8,14 +8,41 @@
   </head>
 
   <body>
+    <h1 class="tetris-title"><img src="../src/images/tetris.png" alt="tetris-logo"></h1>
     <div class="canvases">
-      <div class="hold-canvas-container">
-        <canvas id="hold-canvas" width="180" height="180"></canvas>
+      <div class="left-sidebar">
+        <div class="hold">
+          <h1>HOLD</h1>
+          <canvas id="hold-canvas" width="180" height="180"></canvas>
+        </div>
+        <div class="score">
+          <h1>SCORE</h1>
+            <span class="score-number">0</span>
+          <h1>LEVEL</h1>
+            <span class="level-number">0</span>
+          <h1>LINES</h1>
+            <span class="lines-number">0</span>
+        </div>
+        <div class="controls">
+          <h1>CONTROLS</h1>
+          <ul>
+            <li>Move Right: [&#8594;] [D]</li>
+            <li>Move Left: [&#8592;] [A]</li>
+            <li>Move Down: [&#8595;] [S]</li>
+            <li>Rotate Right: [&#8593;] [X] [W]</li>
+            <li>Rotate Left: [Z] [CTRL]</li>
+            <li>Hold: [C] [SHIFT]</li>
+            <li>Hard Drop: [SPACE]</li>
+            <li>Pause: [P] [F1]</li>
+            <li>Quit Game: [ESC]</li>
+          </ul>
+        </div>
       </div>
       <div class="game-canvas-container">
         <canvas id="game-canvas" width="450" height="900"></canvas>
       </div>
-      <div class="next-canvas-container">
+      <div class="right-sidebar">
+        <h1>NEXT</h1>
         <canvas id="next-canvas" width="180" height="675"></canvas>
       </div>
     </div>
@@ -23,7 +50,7 @@
       <div class="modal-content">
         <div class="game-over">
           <h1>Game Over</h1>
-          <p>Your score: <span id="score"></span></p>
+          <p>Your score: <span class="score-number">0</span></p>
           <button id="restart">Restart</button>
         </div>
         <div class="pause">

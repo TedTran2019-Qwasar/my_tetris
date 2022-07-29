@@ -7,18 +7,6 @@
   width: 450px;
 }
 
-.hold-canvas-container, .next-canvas-container {
-  width: 150px;
-}
-
-.hold-canvas-container {
-  height: 150px;
-}
-
-.next-canvas-container {
-  height: 450px;
-}
-
 #hold-canvas {
   background-color: black;
 }
@@ -67,4 +55,41 @@
 
 .game-over {
   display: none;
+}
+
+.tetris-title {
+  width: 20%;
+  margin: 0 auto;
+}
+
+html {
+  background-color: #DBF9FC
+}
+
+h1 {
+  font-size: 2em;
+  text-align: center;
+}
+
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.score, .controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border:rgba(0, 0, 0, 0.5) solid 1px;
+  width: 180px;
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
+
+.score > h1, .controls > h1 {
+  font-size: 1.5em;
+  color: green;
 }
