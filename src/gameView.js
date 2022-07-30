@@ -27,7 +27,15 @@ export default class GameView {
 
   start() {
     this.bindKeyHandlers();
+    this.repeatMusic();
     this.animate();
+  }
+
+  repeatMusic() {
+    this.bgm.addEventListener('ended', () => {
+      this.bgm.currentTime = 0;
+      this.bgm.play();
+    })
   }
 
   animate() {
