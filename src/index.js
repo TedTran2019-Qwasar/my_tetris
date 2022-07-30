@@ -8,7 +8,15 @@ window.addEventListener('DOMContentLoaded', event => {
   const ctx = canvas.getContext('2d');
   const holdCtx = holdCanvas.getContext('2d');
   const nextCtx = nextCanvas.getContext('2d');
+  const bgm = document.createElement('audio');
+  bgm.setAttribute('src', '../src/sound/tetris_background_song.mp3');
   const game = new Game();
-  const gv = new GameView(game, ctx, holdCtx, nextCtx);
-  gv.start();
+  const gv = new GameView(game, ctx, holdCtx, nextCtx, bgm);
+  const play = document.getElementById('play');
+  play.addEventListener('click', () => {
+    play.style.display = 'none';
+    document.querySelector('.play-holder').style.display = 'none';
+    bgm.play();
+    gv.start();
+  })
 })

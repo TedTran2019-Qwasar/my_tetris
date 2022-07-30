@@ -1,13 +1,14 @@
 import Game from './game.js';
 
 export default class GameView {
-  constructor(game, ctx, holdCtx, nextCtx) {
+  constructor(game, ctx, holdCtx, nextCtx, bgm) {
     this.game = game;
     this.ctx = ctx;
     this.holdCtx = holdCtx;
     this.nextCtx = nextCtx;
     this.paused = false;
     this.isGameOver = false;
+    this.bgm = bgm;
     this.modal = document.querySelector('.modal');
     this.pause = document.querySelector('.pause');
     this.gameOver = document.querySelector('.game-over');
@@ -20,6 +21,7 @@ export default class GameView {
     this.game = new Game();
     this.isGameOver = false;
     this.gameOverFunc();
+    this.bgm.play();
     this.animate();
   }
 
@@ -95,6 +97,7 @@ export default class GameView {
     } else {
       this.pause.style.setProperty('display', 'none'); 
     }
+    this.bgm.paused ? this.bgm.play() : this.bgm.pause();
   }
 
   gameOverFunc() {
@@ -104,6 +107,8 @@ export default class GameView {
     } else {
       this.gameOver.style.setProperty('display', 'none');
     }
+    this.bgm.pause();
+    this.bgm.currentTime = 0;
   }
 
   setGameOver() {
