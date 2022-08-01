@@ -1,6 +1,7 @@
 # My Tetris
 
 Just plain old vanilla Javascript, CSS, and HTML to create tetris. 
+<img src="./assets/tetris-game.png" alt="tetris-game" width="400" height="400" />
 
 ## Types of Tetriminos
 ---
