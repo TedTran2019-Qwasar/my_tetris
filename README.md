@@ -23,7 +23,7 @@ Monochrome
 </br>
 
 1. Clear lines by filling an entire row
-2. Don't let the lines hit the top-- simple, right?
+2. Don't let the tetriminos overfill-- simple, right?
 
 ## Getting Started
 ---
